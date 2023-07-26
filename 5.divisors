@@ -1,0 +1,21 @@
+count_and_print_divisors <- function(num) {
+  divisors <- c()
+  
+  # Loop from 2 to (num - 1) to find divisors
+  for (i in 2:(num - 1)) {
+    if (num %% i == 0) {
+      divisors <- c(divisors, i)
+    }
+  }
+  
+  # Calculate the count of divisors
+  num_divisors <- length(divisors)
+  
+  # Print the divisors and its count
+  cat("Divisors:", ifelse(num_divisors > 0, paste(divisors, collapse = ", "), "None"), "\n")
+  cat("Count of divisors:", num_divisors, "\n")
+}
+
+# Test the function with an example
+num <- 24
+count_and_print_divisors(num)
