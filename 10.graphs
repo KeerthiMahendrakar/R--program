@@ -1,0 +1,21 @@
+# Access the 'mtcars' dataset
+data(mtcars)
+
+# Select four different continuous variables
+selected_vars <- c("mpg", "disp", "qsec", "hp")
+
+# Create a blank canvas for the plot
+plot(1, type = "n", xlab = "Weight (1000 lbs)", ylab = "Value", xlim = c(1, 6), ylim = range(mtcars[selected_vars]))
+
+# Plot lines and points for different variables with different colors
+colors <- c("blue", "red", "green", "purple")
+for (i in 1:length(selected_vars)) {
+  lines(mtcars$wt, mtcars[[selected_vars[i]]], col = colors[i])
+  points(mtcars$wt, mtcars[[selected_vars[i]]], col = colors[i])
+}
+
+# Create a legend for the variables
+legend("topright", legend = selected_vars, col = colors, pch = 1, lty = 1)
+
+# Add a title to the plot
+title(main = "Plot of Four Continuous Variables with Lines and Points")
