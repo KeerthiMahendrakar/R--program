@@ -1,0 +1,10 @@
+# Step a: Read the contents of the file
+data <- read.table("table0.txt", header = TRUE, na.strings = c("*", "--", "**"))
+# Step b: Find the missing values
+missing_values <- sum(is.na(data))
+cat("Number of missing values:", missing_values, "\n")
+# Step c: Replace the missing values in column 4 with the average of the column values
+average_weight <- mean(data$Weight, na.rm = TRUE)
+data$Weight[is.na(data$Weight)] <- average_weight
+# Print the modified data
+print(data)
