@@ -1,30 +1,37 @@
+# Load the required datasets (assuming these are available in your R environment)
+data("state.x77")
+
+# A. Checking the class of state.x77, creating a data frame s77, and checking its class
 class(state.x77)
 s77 <- data.frame(state.x77)
 class(s77)
-#B
+
+# B. Summarizing the s77 data frame
 summary(s77)
-nrow(s77[s77$Income < 5000,]) 
-#C
-row.names(s77 [which.max(s77$Income),])
-row.names(s77 [which.min(s77$Income),])
-#d
-df<-
-data.frame(state.abb,state.area,state.division,state.region,ro
-w.names=state.name)
-colnames(df)<-substr(colnames(df),7,9)
-new.df<-cbind(state.x77,df)
-new.df
-#e
-new.df$div<-NULL
-new.df<-subset(new.df,, -c(4,6,7,9,10))
-new.df
-#f
-new.df$Illiteracy.Levels<-ifelse(new.df$Illiteracy >=0 & 
-new.df$Illiteracy < 1, "Low", 
- ifelse(new.df$Illiteracy >= 1 & 
-new.df$Illiteracy < 2,"Some",
- "High"))
+
+# C. Finding the number of rows where the 'Income' variable is less than 5000
+nrow(s77[s77$Income < 5000,])
+
+# C. Finding row names of maximum and minimum 'Income' values
+row.names(s77[which.max(s77$Income),])
+row.names(s77[which.min(s77$Income),])
+
+# D. Creating a new data frame 'df' and combining it with 'state.x77'
+df <- data.frame(state.abb, state.area, state.division, state.region, row.names = state.name)
+colnames(df) <- substr(colnames(df), 7, 9)
+new.df <- cbind(state.x77, df)
+
+# E. Removing columns from 'new.df'
+new.df$div <- NULL
+new.df <- new.df[, -c(4, 6, 7, 9, 10)]
+
+# F. Creating a new variable 'Illiteracy.Levels' based on 'Illiteracy' values
+new.df$Illiteracy.Levels <- ifelse(new.df$Illiteracy >= 0 & new.df$Illiteracy < 1, "Low",
+                                   ifelse(new.df$Illiteracy >= 1 & new.df$Illiteracy < 2, "Some", "High"))
+
+# Display the 'Illiteracy.Levels' column
 new.df$Illiteracy.Levels
-#g
-x<-subset(new.df,reg =="West" & Illiteracy.Levels =="Low")
+
+# G. Filtering rows based on region and Illiteracy.Levels and finding the row name with the maximum Income
+x <- subset(new.df, state.region == "West" & Illiteracy.Levels == "Low")
 row.names(x[which.max(x$Income),])
